@@ -1,0 +1,22 @@
+{
+  "name": "pizzapp-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.70.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.7",
+    "@types/react": "^18.2.48",
+    "typescript": "^5.3.3"
+  }
+}
