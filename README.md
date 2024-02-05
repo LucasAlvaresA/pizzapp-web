@@ -12,7 +12,7 @@
 
 ## Getting Started
 
--This repository is part of the Pizzapp project ( [App](https://github.com/LucasAlvaresA/pizzapp), [Back-end](https://github.com/LucasAlvaresA/pizzapp-backend) )
+- This repository is part of the Pizzapp project ( [App](https://github.com/LucasAlvaresA/pizzapp), [Back-end](https://github.com/LucasAlvaresA/pizzapp-backend) )
 
 - To get a local copy up and running follow these simple example steps.
 
