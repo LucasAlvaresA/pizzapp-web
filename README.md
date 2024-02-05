@@ -6,9 +6,9 @@
     <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white"/>
 </div>
 
-<!-- <div align="center">
-    <img src="./src/assets/logo.png"/>
-</div> -->
+<div align="center">
+    <img src="./public/logo.png"/>
+</div>
 
 ## Getting Started
 
