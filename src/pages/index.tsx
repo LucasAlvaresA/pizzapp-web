@@ -5,8 +5,26 @@ import logoImg from "../../public/logo.png";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import Link from "next/link";
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
+    const { signIn } = useContext(AuthContext);
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    async function handleLogin(event: FormEvent) {
+        event.preventDefault();
+
+        let data = {
+            email,
+            password,
+        };
+        await signIn(data);
+    }
+
     return (
         <>
             <Head>
@@ -20,9 +38,19 @@ export default function Home() {
                 />
                 <div className={styles.login}>
                     <h1>Login</h1>
-                    <form>
-                        <Input placeholder="E-mail" type="text" />
-                        <Input placeholder="Password" type="password" />
+                    <form onSubmit={handleLogin}>
+                        <Input
+                            placeholder="E-mail"
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                         <Button type="submit" loading={false}>
                             Login
                         </Button>
