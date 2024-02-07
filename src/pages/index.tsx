@@ -7,6 +7,7 @@ import { Button } from "../components/ui/Button";
 import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Home() {
     const { signIn } = useContext(AuthContext);
@@ -19,6 +20,7 @@ export default function Home() {
         event.preventDefault();
 
         if (email === "" || password === "") {
+            toast.warning("Fill in all fields!");
             return;
         }
 

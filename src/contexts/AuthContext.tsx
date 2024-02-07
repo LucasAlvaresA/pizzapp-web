@@ -2,6 +2,7 @@ import Router from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import { ReactNode, createContext, useState } from "react";
 import { api } from "../services/apiClient";
+import { toast } from "react-toastify";
 
 type AuthContextData = {
     user: UserProps;
@@ -70,10 +71,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
             // Set the user token to all next requests
             api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
+            toast.success("Logged in successfully!");
+
             Router.push("/dashboard");
 
             console.log(response.data);
         } catch (error) {
+            toast.error("An error occurred, please try again");
             console.log("login error", error);
         }
     }
@@ -86,8 +90,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password,
             });
 
+            toast.success("Account created successfully!");
             Router.push("/");
         } catch (error) {
+            toast.error("An error occurred, please try again");
             console.log("sign up error", error);
         }
     }
