@@ -8,6 +8,7 @@ type AuthContextData = {
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>;
     signOut: () => void;
+    signUp: (credentials: SignUpProps) => Promise<void>;
 };
 
 type UserProps = {
@@ -17,6 +18,12 @@ type UserProps = {
 };
 
 type SignInProps = {
+    email: string;
+    password: string;
+};
+
+type SignUpProps = {
+    name: string;
     email: string;
     password: string;
 };
@@ -71,9 +78,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    async function signUp({ name, email, password }: SignUpProps) {
+        try {
+            const response = await api.post("/register", {
+                name,
+                email,
+                password,
+            });
+
+            Router.push("/");
+        } catch (error) {
+            console.log("sign up error", error);
+        }
+    }
+
     return (
         <AuthContext.Provider
-            value={{ user, isAuthenticated, signIn, signOut }}
+            value={{ user, isAuthenticated, signIn, signOut, signUp }}
         >
             {children}
         </AuthContext.Provider>

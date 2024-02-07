@@ -5,8 +5,38 @@ import logoImg from "../../../public/logo.png";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import Link from "next/link";
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function SignUp() {
+    const { signUp } = useContext(AuthContext);
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [loading, setLoading] = useState(false);
+
+    async function handleSignUp(event: FormEvent) {
+        event.preventDefault();
+
+        if (name === "" || email === "" || password === "") {
+            return;
+        }
+
+        setLoading(true);
+
+        let data = {
+            name,
+            email,
+            password,
+        };
+
+        await signUp(data);
+
+        setLoading(false);
+    }
+
     return (
         <>
             <Head>
@@ -20,11 +50,26 @@ export default function SignUp() {
                 />
                 <div className={styles.login}>
                     <h1>Sign Up</h1>
-                    <form>
-                        <Input placeholder="Your name" type="text" />
-                        <Input placeholder="E-mail" type="text" />
-                        <Input placeholder="Password" type="password" />
-                        <Button type="submit" loading={false}>
+                    <form onSubmit={handleSignUp}>
+                        <Input
+                            placeholder="Your name"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <Input
+                            placeholder="E-mail"
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <Button type="submit" loading={loading}>
                             Sign up
                         </Button>
                     </form>
