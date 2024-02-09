@@ -3,8 +3,26 @@ import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Header } from "../../components/Header";
 import styles from "./styles.module.scss";
 import { FiRefreshCcw } from "react-icons/fi";
+import { setUpAPIClient } from "../../services/api";
+import { useState } from "react";
 
-export default function Dashboard() {
+type OrderType = {
+    id: string;
+    table: string | number;
+    status: boolean;
+    draft: boolean;
+    name: string | null;
+};
+
+interface HomeProps {
+    orders: OrderType[];
+}
+
+export default function Dashboard({ orders }: HomeProps) {
+    const [orderList] = useState(orders || []);
+
+    function handleOpenModal(id: string) {}
+
     return (
         <>
             <Head>
@@ -21,12 +39,21 @@ export default function Dashboard() {
                     </div>
 
                     <article className={styles.listOrder}>
-                        <section className={styles.orderItem}>
-                            <button>
-                                <div className={styles.tag}></div>
-                                <span>Table 30</span>
-                            </button>
-                        </section>
+                        {orderList.map((item) => {
+                            return (
+                                <section
+                                    className={styles.orderItem}
+                                    key={item.id}
+                                >
+                                    <button
+                                        onClick={() => handleOpenModal(item.id)}
+                                    >
+                                        <div className={styles.tag}></div>
+                                        <span>Table {item.table}</span>
+                                    </button>
+                                </section>
+                            );
+                        })}
                     </article>
                 </main>
             </div>
@@ -35,7 +62,13 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = canSSRAuth(async (context) => {
+    const apiClient = setUpAPIClient(context);
+
+    const response = await apiClient.get("/orders");
+
     return {
-        props: {},
+        props: {
+            orders: response.data,
+        },
     };
 });
