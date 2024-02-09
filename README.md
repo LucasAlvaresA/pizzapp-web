@@ -5,10 +5,6 @@
     <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white"/>
 </div>
 
-<div align="center">
-    <img src="./public/logo.png"/>
-</div>
-
 ## Getting Started
 
 - This repository is part of the Pizzapp project ( [App](https://github.com/LucasAlvaresA/pizzapp), [Back-end](https://github.com/LucasAlvaresA/pizzapp-backend) )
@@ -32,3 +28,8 @@
 - Run the project
 
       yarn dev
+
+
+<div align="center">
+    <img src="./public/logo.png"/>
+</div>
